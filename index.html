@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Explore Countries Factsheets</title>
+    <link rel="stylesheet" href="/static/stylesheet.css">
+<!--<link rel="icon" href="data:image/x-icon;,">-->
+</head>
+
+<body>
+    <div class="split left">
+        <div class="centered">
+          <img src="/static/Flags.jpeg" alt="Flags">
+        </div>
+    </div>
+    
+    <div class="split right">
+        <div class="center">
+        <h1 id="title">Explore Countries <br> </h1>
+        <h2 id="subTitle">Search country general information <br>
+            (example: France, Spain, united Kingdom)<br></h2>
+        </div>
+
+        <div class="centered">
+            <div id="welcome-container">
+            <input type="text" id="firstNameInput" placeholder="Enter your first Name">
+            <button type="button" onclick="saveUserName()">Submit</button>
+            <div id="welcomeMessage"></div>
+        </div>
+        <br>
+        <div id="main-container">
+            <div id="left-side">
+            </div>
+
+            <div id="right-side">
+                <input type="text" id="searchInput" placeholder="Search country">
+                <button type="button" onclick="searchCountry()">Search</button><br>
+                <br>
+                <button type="button" onclick="exploreAllCountries()">Explore All Countries</button>
+                <div id="addCountryBox">
+                    <input type="text" id="addCountryInput" placeholder="New Country Name">
+                    <button type="button" onclick="addCountry()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/homepage.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+    "country_details": [ 
+        {
+        "Country": "austria",
+        "Density": 109,
+        "Birth_Rate": 9.7,
+        "Capital": "Vienna",
+        "GDP": "446,314,739,528",
+        "Life_expectancy": 81.6,
+        "Official_language": "German",
+        "Unemployment_rate": 4.67,
+        "Urban_population": "5,194,416",
+        "Latitude": 47.516231,
+        "Longitude": 14.550072
+        },
+
+        {
+            "Country": "Belgium",
+            "Density": "383",
+            "Birth_Rate": "10.3",
+            "Capital": "City of Brussels",
+            "GDP": "\"529",
+            "Life_expectancy": "606",
+            "Official_language": "710",
+            "Unemployment_rate": "418 \"",
+            "Urban_population": "81.6",
+            "Latitude": "French",
+            "Longitude\r": "5.59"
+        }
+    ]
+}
