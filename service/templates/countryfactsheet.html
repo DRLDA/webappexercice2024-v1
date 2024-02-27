@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Country Factsheet</title>
+</head>
+<body>
+    <h1 id="countryName">Country Factsheet</h1>
+    <ul>
+        <li>Country: <span id="country"></span></li>
+        <li>Density: <span id="density"></span></li>
+        <li>Birth Rate: <span id="birthRate"></span></li>
+        <li>Capital: <span id="capital"></span></li>
+        <li>GDP: <span id="gdp"></span></li>
+        <li>Life Expectancy: <span id="lifeExpectancy"></span></li>
+        <li>Official Language: <span id="officialLanguage"></span></li>
+        <li>Unemployment Rate: <span id="unemploymentRate"></span></li>
+        <li>Urban Population: <span id="urbanPopulation"></span></li>
+        <li>Latitude: <span id="latitude"></span></li>
+        <li>Longitude: <span id="longitude"></span></li>
+        <p>{{found_countrys}}</p>
+    </ul>
+
+    <script>
+        // Récupérer les données du sessionStorage
+        var countryData = JSON.parse(sessionStorage.getItem('currentSearch'));
+
+        // Mettre à jour les éléments du document avec les valeurs du localStorage
+        document.getElementById('countryName').textContent = countryData.Country + ' Factsheet';
+        document.getElementById('country').textContent = countryData.Country;
+        document.getElementById('density').textContent = countryData.Density;
+        document.getElementById('birthRate').textContent = countryData.Birth_Rate;
+        document.getElementById('capital').textContent = countryData.Capital;
+        document.getElementById('gdp').textContent = countryData.GDP;
+        document.getElementById('lifeExpectancy').textContent = countryData.Life_expectancy;
+        document.getElementById('officialLanguage').textContent = countryData.Official_language;
+        document.getElementById('unemploymentRate').textContent = countryData.Unemployment_rate;
+        document.getElementById('urbanPopulation').textContent = countryData.Urban_population;
+        document.getElementById('latitude').textContent = countryData.Latitude;
+        document.getElementById('longitude').textContent = countryData.Longitude;
+    </script>
+</body>
+</html>

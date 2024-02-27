@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Country Factsheets</title>
+    <link rel="stylesheet" href="../static/stylesheet.css">
+
+</head>
+<body>
+    <h1>All Country Factsheets</h1>
+    <!--<p>{{liste}}</p>-->
+    <ul>
+        {% if liste %}
+    
+            {% for country in  liste  %}      <!--<p>VVerification si la liste contient des données</p>-->
+                <li>
+                    <h2>{{country["Country"]}}</h2>
+                    <table >
+                        <thead>
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Value</th>
+                            </tr
+
+                        </thead>
+                        <tbody>
+                            {% for key, value in  country.items() %}
+                        <tr>
+                        
+                            <td>{{ key }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    
+                        {% endfor %}
+
+
+                        </tbody>
+                        
+                        
+                        
+                    </table>
+                    <ul>
+                
+                    </ul>
+                </li>
+            {%  endfor %}
+        {% else %}
+            <li>Pas de données disponible</li>
+
+
+        {% endif %}
+
+    </ul>                 
+</body>
+</html>
