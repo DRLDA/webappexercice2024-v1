@@ -58,6 +58,7 @@ function searchCountry() {
 //Add new country in records
 function addCountry() {
     let countryName = document.getElementById(`addCountryInput`).value;
+    console.log(countryName);
     fetch(`http://127.0.0.1:5000/addcountry`, {
             method: 'POST',
             headers: {
@@ -72,8 +73,10 @@ function addCountry() {
             if (!data.success) {
                 alert("Error while saving new Country. Try again later!");
             } else {
+                console.log(data.data)
                 sessionStorage.setItem("currentSearch", JSON.stringify(data.data))
-                window.location.href = `D:/Code/Flask/Debug/1/webappexercice2024/service/templates/countryfactsheet.html`;
+                    // window.location.href = `D:/Code/Flask/Debug/1/webappexercice2024/service/templates/countryfactsheet.html`;
+                window.location.href = `countryaddedredirect`;
             }
         });
 }

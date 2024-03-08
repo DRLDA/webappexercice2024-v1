@@ -9,40 +9,32 @@ from service import app
 
 #app = flask.Flask(__name__, static_url_path='/static')
 json_file_path_short = 'D:\Code\Flask\Debug\webappexercice2024\countryshortlistvf.json'
-country_list_json_file_path = 'D:\Code\Flask\Debug\webappexercice2024\countryfactsheetDBvf.json'
+country_list_json_file_path = 'D:\Code\Flask\Debug\last\webappexercice2024\countryfactsheetDBvf.json'
   #json_file_path_short = '/Users/Darell/workspace/ExtensionSchool/python/20.Webapp/countryshortlistvf.json'
 
 #function to read data from my json file
 def read_json(): ##Suppression du paramètre
     #print("read_json")
-    with open(json_file_path_short, mode='r') as file:
+    with open(country_list_json_file_path, mode='r') as file:
         content = file.read()
     if content: 
         data = json.loads(content)
         return data
     else:
         return None
-    
-def write_to_json(new_data):
-    # Lire le contenu actuel du fichier JSON
-    with open(json_file_path_short, mode='r') as file:
-        content = file.read()
-    
-    # Convertir le contenu en une structure de données Python
-    if content:
-        data = json.loads(content)
-    else:
-        data = {"country_details": []}
 
-    # Ajouter de nouvelles données au tableau country_details
-    data["country_details"].append(new_data)
 
-    # Écrire la nouvelle structure de données dans le fichier JSON
-    with open(json_file_path_short, mode='w') as file:
-        json.dump(data, file, indent=2)
 
-#read the Json data from the file   
-data = read_json()
+
+def write_to_json(data):
+    with open('data.json', 'r+') as file:
+        # Charger les données JSON existantes
+        existing_data = json.load(file)
+        # Ajouter les nouvelles données
+        existing_data.append(data)
+        # Réécrire le fichier JSON avec les données mises à jour
+        file.seek(0)
+        json.dump(existing_data, file, indent=4)
 
 #first variable to get first html page
 def get_html(page_name):
@@ -106,7 +98,7 @@ def country_factsheet(country_name):
 
 @app.route("/addcountry", methods= ["POST"])
 def add_country():
-    country_name =  request.json['countryName']
+    country_name =  request.json.get['countryName']
     try:
         new_data = {
             "Country": country_name,
@@ -154,8 +146,6 @@ def allcountrysheet():
         return flask.render_template("allcountryfactsheets.html", liste = None)
 
 
-    
-
     # return flask.render_template("allcountryfactsheets.html", liste=liste)
     return flask.render_template("allcountryfactsheets.html" )
 
@@ -167,3 +157,10 @@ def redirectionPays():
 @app.route('/showcountry')
 def showcountry():
     return flask.render_template('showcountry.html')
+
+#Redirection passant par un chemin intermediaire pour affichier ce qui est a ajouté
+@app.route('/countryaddedredirect')
+def redirectionPaysadd():
+    return redirect(url_for('showcountry'))
+
+
