@@ -2,7 +2,6 @@
 #import flask and json
 import flask
 import json
-
 from flask import request, redirect, url_for
 
 from service import app
@@ -49,25 +48,54 @@ def get_country():
         data = json.load(countryshortlist) 
         return data
 
+
+#load_json_date
+def load_json_data(file_path):
+    """
+    Chargement des données à partir d'un fichier JSON.
+    
+    Args:
+        file_path (str): Chemin vers le fichier JSON.
+        
+    Returns:
+        dict: Les données chargées à partir du fichier JSON.
+    """
+    with open(file_path, 'r') as file:
+        data = json.load(file)
+    return data
+
+
+
+
 #APP ROUTES
 @app.route("/")
 def homepage(): 
     return flask.render_template('./index.html')
 
-@app.route("/get_json_data", methods=["GET"])
-def get_json_data():
-    return flask.jsonify(data)        
+# @app.route("/get_json_data", methods=["GET"])
+# def get_json_data():
+#     return flask.jsonify(data)      
+
+
+#search
 
 @app.route("/search", methods=["GET"])
 def search():
     try:
-        search_input = flask.request.args.get('searchInput')
-        found_country = next((country for country in data['country_details'] if country['Country'].lower() == search_input.lower()), None)
-        found_countrys = "fred"
+        # Chargerment des données à partir du fichier json 
+        data = load_json_data(country_list_json_file_path)
 
+        #Récupere la valeur du paramètre  de recherche à partir de la requete HTTP
+        search_input = flask.request.args.get('searchInput')
+
+        # Recherchez le pays correspondant dans les détails des pays
+
+        found_country = next((country for country in data if country['Country'].lower() == search_input.lower()), None)
+ 
+ 
         if found_country:
             return flask.jsonify({"data": found_country,"success":True})
-            return flask.render_template('countryfactsheet.html', countryss=found_countrys)
+            #return flask.render_template('countryfactsheet.html', countryss=found_country)
         else:
             return flask.jsonify({"data": {},"success":False})
             #return "Country not found. Please add it using the Add functionality."
