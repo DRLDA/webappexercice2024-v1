@@ -8,7 +8,8 @@ from service import app
 
 #app = flask.Flask(__name__, static_url_path='/static')
 json_file_path_short = 'D:\Code\Flask\Debug\webappexercice2024\countryshortlistvf.json'
-country_list_json_file_path = 'D:\Code\Flask\Debug\last\webappexercice2024\countryfactsheetDBvf.json'
+country_list_json_file_path = 'D:\Code\Flask\Debug\last\webappexercice2024\service\countryfactsheetDBvf.json'
+country_list_json_file_pathtest = 'D:\Code\Flask\Debug\last\webappexercice2024\service\countryfactsheetDBvfTest.json'
   #json_file_path_short = '/Users/Darell/workspace/ExtensionSchool/python/20.Webapp/countryshortlistvf.json'
 
 #function to read data from my json file
@@ -26,14 +27,49 @@ def read_json(): ##Suppression du paramètre
 
 
 def write_to_json(data):
-    with open('data.json', 'r+') as file:
+    # with open(country_list_json_file_path, 'a') as file:
+    #r+ va ouvrir le fichier en écritur et rempplacer le contenu
+    with open(country_list_json_file_pathtest, 'r') as file:
         # Charger les données JSON existantes
         existing_data = json.load(file)
-        # Ajouter les nouvelles données
+        
+        # Ajouter les nouvelles données à la liste des données existantes
         existing_data.append(data)
-        # Réécrire le fichier JSON avec les données mises à jour
+        # Réécrire le fichier JSON avec les données mises à jour 
+        # with open(country_list_json_file_path, 'w') as file:
+            # Réécrire le fichier JSON avec les données mises à jour (rembobiner) et le tronquer
         file.seek(0)
+        file.truncate()
         json.dump(existing_data, file, indent=4)
+
+        # Écrire les données JSON dans le fichier
+        # json.dump(data, file)
+
+        # Ajouter une nouvelle ligne pour séparer les données
+        # file.write('\n')
+
+def write_to_jsons(data):
+    with open(country_list_json_file_path, 'a') as file:
+    #r+ va ouvrir le fichier en écritur et rempplacer le contenu
+    # with open(country_list_json_file_path, 'r') as file:
+        # Charger les données JSON existantes
+        # existing_data = json.load(file)
+        
+        # Ajouter les nouvelles données à la liste des données existantes
+        # existing_data.append(data)
+        # Réécrire le fichier JSON avec les données mises à jour 
+        # with open(country_list_json_file_path, 'w') as file:
+            # Réécrire le fichier JSON avec les données mises à jour (rembobiner) et le tronquer
+        #file.seek(0)
+        #file.truncate()
+            # json.dump(existing_data, file, indent=4)
+
+        # Écrire les données JSON dans le fichier
+        json.dump(data, file)
+
+        # Ajouter une nouvelle ligne pour séparer les données
+        file.write('\n')
+            
 
 #first variable to get first html page
 def get_html(page_name):
@@ -110,38 +146,39 @@ def search():
 #    print("Country Data:", country_data)
 #    return flask.render_template('countryfactsheet.html', country=country_data)
 
-@app.route("/countryfactsheet/<country_name>")
-def country_factsheet(country_name):
-    try:
-        country_data = next((country for country in data if country['Country'].lower() == country_name.lower()), None)
-        print("Country Data:", country_data)
-        if country_data:
-            return flask.render_template('countryfactsheet.html', country=country_data)
-        else:
-            return "Country not found. Please add it using the Add functionality."
-    except Exception as e:
-        print("Error processing request:", e)
-        return "An error occurred while processing the request."
+# @app.route("/countryfactsheet/<country_name>")
+# def country_factsheet(country_name):
+#     try:
+#         country_data = next((country for country in data if country['Country'].lower() == country_name.lower()), None)
+#         print("Country Data:", country_data)
+#         if country_data:
+#             return flask.render_template('countryfactsheet.html', country=country_data)
+#         else:
+#             return "Country not found. Please add it using the Add functionality."
+#     except Exception as e:
+#         print("Error processing request:", e)
+#         return "An error occurred while processing the request."
     
 
 @app.route("/addcountry", methods= ["POST"])
 def add_country():
-    country_name =  request.json.get['countryName']
+    # Récupération du nom du pays envoyé dans la req Post
+    country_name =  request.json.get('countryName')
     try:
         new_data = {
             "Country": country_name,
-            "Density": 109,
-            "Birth_Rate": 9.7,
+            "Density": "109",
+            "Birth_Rate": "9.7",
             "Capital": "Lol",
             "GDP": "446,314,739,528",
-            "Life_expectancy": 81.6,
+            "Life_expectancy": "81.6",
             "Official_language": "Lol",
-            "Unemployment_rate": 4.67,
+            "Unemployment_rate": "4.67",
             "Urban_population": "5,194,416",
-            "Latitude": 47.516231,
-            "Longitude": 14.550072
+            "Latitude": "47.516231",
+            "Longitude": "14.550072"
         }
-        write_to_json(new_data)
+        write_to_jsons(new_data)
         return flask.jsonify({"data": new_data,"success":True})
     except Exception as e:
         print("Error processing request:", e)
