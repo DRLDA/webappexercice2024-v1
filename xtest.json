@@ -1,0 +1,27 @@
+[{
+        "Country": "Afghanistan",
+        "Density": "60",
+        "Birth_Rate": "32.49",
+        "Capital": "Kabul",
+        "GDP": "$19",
+        "Life_expectancy": "101",
+        "Official_language": "353",
+        "Unemployment_rate": "833",
+        "Urban_population": "64.5",
+        "Latitude": "Pashto",
+        "Longitude": "11.12%"
+    },
+    {
+        "Country": "Belgium",
+        "Density": "383",
+        "Birth_Rate": "10.3",
+        "Capital": "City of Brussels",
+        "GDP": "\"529",
+        "Life_expectancy": "606",
+        "Official_language": "710",
+        "Unemployment_rate": "418 \"",
+        "Urban_population": "81.6",
+        "Latitude": "French",
+        "Longitude\r": "5.59"
+    }
+]
