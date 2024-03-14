@@ -15,7 +15,7 @@ country_list_json_file_pathtest = 'D:\Code\Flask\Debug\last\webappexercice2024\s
 #function to read data from my json file
 def read_json(): ##Suppression du paramètre
     #print("read_json")
-    with open(country_list_json_file_path, mode='r') as file:
+    with open(country_list_json_file_pathtest, mode='r') as file:
         content = file.read()
     if content: 
         data = json.loads(content)
@@ -69,7 +69,24 @@ def write_to_jsons(data):
 
         # Ajouter une nouvelle ligne pour séparer les données
         file.write('\n')
-            
+
+def add_to_json(new_data):
+    try:
+        # Charger les données JSON existantes depuis le fichier
+        with open(country_list_json_file_path, 'r') as file:
+            existing_data = json.load(file)
+
+        # Ajouter la nouvelle donnée à la liste des données existantes
+        existing_data.append(new_data)
+
+        # Réécrire le fichier JSON avec les données mises à jour
+        with open(country_list_json_file_path, 'w') as file:
+            json.dump(existing_data, file, indent=4)
+
+        return True
+    except Exception as e:
+        print("Erreur lors de l'ajout de la nouvelle donnée :", e)
+        return False           
 
 #first variable to get first html page
 def get_html(page_name):
@@ -162,7 +179,7 @@ def search():
 
 @app.route("/addcountry", methods= ["POST"])
 def add_country():
-    # Récupération du nom du pays envoyé dans la req Post
+    # Récupération du nom du pays envoyé dans la requêt Post
     country_name =  request.json.get('countryName')
     try:
         new_data = {
@@ -178,11 +195,14 @@ def add_country():
             "Latitude": "47.516231",
             "Longitude": "14.550072"
         }
-        write_to_jsons(new_data)
+        add_to_json(new_data)
         return flask.jsonify({"data": new_data,"success":True})
     except Exception as e:
         print("Error processing request:", e)
         return "An error occurred while processing the request."
+
+
+
 
 # Redirection passant par un chemin intermédiaire pour lister les pays
 @app.route("/allcountryfactredirect")

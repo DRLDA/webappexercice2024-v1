@@ -80,3 +80,25 @@ function addCountry() {
             }
         });
 }
+
+//Add new country in records
+function saveUsername() {
+    let username = document.getElementById(`firstNameInput`).value;
+    let defaultUsername = "users"
+    console.log(typeof username);
+    if (username !== "" || username !== null) {
+        localStorage.setItem("username", username)
+    } else {
+        localStorage.setItem("username", "defaultUsername")
+
+    }
+
+
+
+
+}
+
+var welcomeMessageVar = localStorage.getItem('username');
+
+// Mettre à jour les éléments du document avec les valeurs du localStorage
+document.getElementById('welcomeMessage').textContent = "Welcome back " + welcomeMessageVar;

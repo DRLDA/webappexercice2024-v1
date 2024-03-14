@@ -1,5 +1,4 @@
-[
-    {
+[{
         "Country": "Afghanistan",
         "Density": "60",
         "Birth_Rate": "32.49",
@@ -2522,4 +2521,3 @@
         "Longitude": "4.95%"
     }
 ]
-{"Country": "azerty", "Density": 109, "Birth_Rate": 9.7, "Capital": "Lol", "GDP": "446,314,739,528", "Life_expectancy": 81.6, "Official_language": "Lol", "Unemployment_rate": 4.67, "Urban_population": "5,194,416", "Latitude": 47.516231, "Longitude": 14.550072}
